@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - EcoRide</title>
+</head>
+<body>
+
+    <header>
+        <h1>EcoRide Admin Dashboard</h1>
+        <p>Welcome, Admin</p>
+        <a href="index.html">Home</a> |
+        <a href="login.html">Logout</a>
+    </header>
+
+    <hr>
+
+    <nav>
+        <a href="#overview">Dashboard Overview</a> |
+        <a href="#users">Manage Users</a> |
+        <a href="#activity">Activity Log</a> |
+        <a href="#rules">Rental Rules and Pricing</a>
+    </nav>
+
+    <hr>
+
+    <section id="overview">
+        <h2>Dashboard Overview</h2>
+
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Total Users</th>
+                <th>Total Bikes</th>
+                <th>Total Bookings</th>
+                <th>Accessory Sales</th>
+            </tr>
+            <tr>
+                <td>120</td>
+                <td>45</td>
+                <td>85</td>
+                <td>৳25,000</td>
+            </tr>
+        </table>
+
+        <h3>Monthly Booking Information</h3>
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Month</th>
+                <th>Total Bookings</th>
+            </tr>
+            <tr>
+                <td>October</td>
+                <td>35</td>
+            </tr>
+            <tr>
+                <td>September</td>
+                <td>28</td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="users">
+        <h2>Manage Users</h2>
+
+        <h3>Add New User</h3>
+        <form action="#" method="post">
+
+            <label>Full Name:</label><br>
+            <input type="text" name="name">
+            <br><br>
+
+            <label>Email:</label><br>
+            <input type="email" name="email">
+            <br><br>
+
+            <label>Password:</label><br>
+            <input type="password" name="password">
+            <br><br>
+
+            <label>Phone:</label><br>
+            <input type="tel" name="phone">
+            <br><br>
+
+            <label>User Role:</label><br>
+            <select name="role">
+                <option>Admin</option>
+                <option>Customer</option>
+                <option>Station Manager</option>
+                <option>Seller</option>
+            </select>
+            <br><br>
+
+            <input type="submit" value="Add User">
+
+        </form>
+
+        <h3>Search User</h3>
+        <input type="text" name="search_user" placeholder="Search by name or email">
+        <input type="submit" value="Search">
+
+        <h3>User List</h3>
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahim Ahmed</td>
+                <td>rahim@gmail.com</td>
+                <td>Customer</td>
+                <td>Active</td>
+                <td>
+                    <a href="#">Edit</a> |
+                    <a href="#">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Karim Hasan</td>
+                <td>karim@gmail.com</td>
+                <td>Station Manager</td>
+                <td>Active</td>
+                <td>
+                    <a href="#">Edit</a> |
+                    <a href="#">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="activity">
+        <h2>Activity Log</h2>
+
+        <h3>Search Activity</h3>
+        <input type="text" name="search_activity" placeholder="Search activity">
+
+        <input type="submit" value="Search">
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Activity ID</th>
+                <th>User</th>
+                <th>Activity</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Rahim Ahmed</td>
+                <td>Booked an E-Bike</td>
+                <td>01-11-2026</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Karim Hasan</td>
+                <td>Updated Bike Status</td>
+                <td>01-11-2026</td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="rules">
+        <h2>Rental Rules and Pricing Management</h2>
+
+        <h3>Add Rental Rule or Price</h3>
+
+        <form action="#" method="post">
+
+            <label>Rule or Price Name:</label><br>
+            <input type="text" name="rule">
+            <br><br>
+
+            <label>Value:</label><br>
+            <input type="text" name="value">
+            <br><br>
+
+            <label>Description:</label><br>
+            <textarea name="description" rows="4" cols="40"></textarea>
+            <br><br>
+
+            <input type="submit" value="Save">
+
+        </form>
+
+        <h3>Current Rental Rules</h3>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Rule Name</th>
+                <th>Value</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>Hourly Rental Price</td>
+                <td>৳100</td>
+                <td>Price per hour</td>
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+            <tr>
+                <td>Late Return Fee</td>
+                <td>৳50</td>
+                <td>Additional fee for late return</td>
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <footer>
+        <p>EcoRide Admin Dashboard</p>
+    </footer>
+
+</body>
+</html>
