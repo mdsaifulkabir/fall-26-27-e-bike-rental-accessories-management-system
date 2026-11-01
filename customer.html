@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide Customer Dashboard</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>EcoRide Customer Dashboard</h1>
+        <p>Welcome, Customer</p>
+
+        <a href="index.html">Home</a> |
+        <a href="login.html">Logout</a>
+    </header>
+
+    <hr>
+
+    <nav>
+        <a href="#overview">Dashboard Overview</a> |
+        <a href="#booking">E-Bike Booking</a> |
+        <a href="#rides">Ride Management</a> |
+        <a href="#mybookings">My Bookings</a> |
+        <a href="#accessories">Accessories Purchase</a> |
+        <a href="#mypurchases">My Purchases</a>
+    </nav>
+
+    <hr>
+
+    <!-- DASHBOARD OVERVIEW -->
+
+    <section id="overview">
+        <h2>Dashboard Overview</h2>
+
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Total Bookings</th>
+                <th>Completed Rides</th>
+                <th>Accessories Purchased</th>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <!-- E-BIKE BOOKING FORM -->
+
+    <section id="booking">
+        <h2>E-Bike Booking</h2>
+
+        <p>Search for available bikes and select your preferred bike.</p>
+
+        <h3>Search Available Bikes</h3>
+
+        <form action="#availablebikes" method="get">
+
+            <label>Select Station:</label><br>
+
+            <select name="station" required>
+                <option value="">Select Station</option>
+                <option value="Dhaka North">Dhaka North Station</option>
+                <option value="Uttara">Uttara Station</option>
+                <option value="Banani">Banani Station</option>
+            </select>
+
+            <br><br>
+
+            <label>Booking Date:</label><br>
+            <input type="date" name="booking_date" required>
+
+            <br><br>
+
+            <label>Booking Time:</label><br>
+            <input type="time" name="booking_time" required>
+
+            <br><br>
+
+            <button type="submit">Search Bikes</button>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <!-- AVAILABLE BIKES -->
+
+    <section id="availablebikes">
+        <h2>Available Bikes</h2>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Bike ID</th>
+                <th>Bike Model</th>
+                <th>Station</th>
+                <th>Hourly Price</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>B101</td>
+                <td>EcoRide X1</td>
+                <td>Uttara Station</td>
+                <td>৳100</td>
+                <td>Available</td>
+                <td><a href="#rides">Book Now</a></td>
+            </tr>
+
+            <tr>
+                <td>B102</td>
+                <td>EcoRide Pro</td>
+                <td>Banani Station</td>
+                <td>৳120</td>
+                <td>Available</td>
+                <td><a href="#rides">Book Now</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <!-- RIDE MANAGEMENT AND FARE CALCULATION -->
+
+    <section id="rides">
+        <h2>Ride Management and Fare Calculation</h2>
+
+        <p>Enter your ride information below.</p>
+
+        <form action="#mybookings" method="get">
+
+            <label>Bike ID:</label><br>
+
+            <select name="bike_id" required>
+                <option value="">Select Bike</option>
+                <option value="B101">B101 - EcoRide X1</option>
+                <option value="B102">B102 - EcoRide Pro</option>
+            </select>
+
+            <br><br>
+
+            <label>Booking Date:</label><br>
+            <input type="date" name="ride_date" required>
+
+            <br><br>
+
+            <label>Start Time:</label><br>
+            <input type="time" name="start_time" required>
+
+            <br><br>
+
+            <label>Ride Duration (Hours):</label><br>
+            <input type="number" name="duration" min="1" step="0.5" required>
+
+            <br><br>
+
+            <label>Price Per Hour (৳):</label><br>
+
+            <select name="price" required>
+                <option value="">Select Hourly Price</option>
+                <option value="100">EcoRide X1 - ৳100</option>
+                <option value="120">EcoRide Pro - ৳120</option>
+            </select>
+
+            <br><br>
+
+            <label>Pickup Station:</label><br>
+
+            <select name="station" required>
+                <option value="">Select Station</option>
+                <option value="Dhaka North">Dhaka North Station</option>
+                <option value="Uttara">Uttara Station</option>
+                <option value="Banani">Banani Station</option>
+            </select>
+
+            <br><br>
+
+            <button type="submit">Calculate Fare</button>
+
+        </form>
+
+        <h3>Ride Information</h3>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Ride ID</th>
+                <th>Bike ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Duration</th>
+                <th>Fare</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>R101</td>
+                <td>B101</td>
+                <td>10:00 AM</td>
+                <td>11:30 AM</td>
+                <td>1.5 Hours</td>
+                <td>৳150</td>
+                <td>
+                    <a href="#rides">Edit</a> |
+                    <a href="#rides">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <!-- MY BOOKINGS -->
+
+    <section id="mybookings">
+        <h2>My Bookings</h2>
+
+        <form action="#mybookings" method="get">
+
+            <label>Search Booking:</label><br>
+
+            <input type="text" name="search_booking" placeholder="Enter Booking ID">
+
+            <button type="submit">Search</button>
+
+        </form>
+
+        <br>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Booking ID</th>
+                <th>Bike ID</th>
+                <th>Bike Model</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Fare</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>BK101</td>
+                <td>B101</td>
+                <td>EcoRide X1</td>
+                <td>01-11-2026</td>
+                <td>1.5 Hours</td>
+                <td>৳150</td>
+                <td>Confirmed</td>
+                <td>
+                    <a href="#rides">Edit</a> |
+                    <a href="#mybookings">Cancel</a>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <a href="#booking">Book Another Bike</a>
+    </section>
+
+    <hr>
+
+    <!-- ACCESSORIES PURCHASE -->
+
+    <section id="accessories">
+        <h2>Accessories Purchase</h2>
+
+        <p>Browse and purchase available bike accessories.</p>
+
+        <h3>Available Accessories</h3>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>P101</td>
+                <td>Safety Helmet</td>
+                <td>৳1500</td>
+                <td>20</td>
+                <td><a href="#purchase">Buy Now</a></td>
+            </tr>
+
+            <tr>
+                <td>P102</td>
+                <td>Bike Lock</td>
+                <td>৳500</td>
+                <td>15</td>
+                <td><a href="#purchase">Buy Now</a></td>
+            </tr>
+        </table>
+
+        <h3>Purchase Information</h3>
+
+        <form action="#mypurchases" method="get" id="purchase">
+
+            <label>Product Name:</label><br>
+
+            <select name="product" required>
+                <option value="">Select Product</option>
+                <option value="Safety Helmet">Safety Helmet - ৳1500</option>
+                <option value="Bike Lock">Bike Lock - ৳500</option>
+            </select>
+
+            <br><br>
+
+            <label>Quantity:</label><br>
+            <input type="number" name="quantity" min="1" required>
+
+            <br><br>
+
+            <label>Amount (৳):</label><br>
+            <input type="number" name="amount" min="1" required>
+
+            <br><br>
+
+            <button type="submit">Place Order</button>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <!-- MY PURCHASES -->
+
+    <section id="mypurchases">
+        <h2>My Purchases</h2>
+
+        <form action="#mypurchases" method="get">
+
+            <label>Search Purchase:</label><br>
+
+            <input type="text" name="search_purchase" placeholder="Enter Order ID">
+
+            <button type="submit">Search</button>
+
+        </form>
+
+        <br>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Order ID</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>OR101</td>
+                <td>Safety Helmet</td>
+                <td>1</td>
+                <td>৳1500</td>
+                <td>Ordered</td>
+                <td>
+                    <a href="#purchase">Edit</a> |
+                    <a href="#mypurchases">Delete</a>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <a href="#accessories">Purchase Another Product</a>
+    </section>
+
+    <hr>
+
+    <footer>
+        <p>EcoRide Customer Dashboard</p>
+        <p>All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
