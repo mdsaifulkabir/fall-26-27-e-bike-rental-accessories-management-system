@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Station Manager Dashboard - EcoRide</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>EcoRide Station Manager Dashboard</h1>
+        <p>Welcome, Station Manager</p>
+        <a href="index.html">Home</a> |
+        <a href="login.html">Logout</a>
+    </header>
+
+    <hr>
+
+    <nav>
+        <a href="#overview">Dashboard Overview</a> |
+        <a href="#station">Station Information</a> |
+        <a href="#bikes">Bike Status Management</a> |
+        <a href="#availability">Station Availability</a>
+    </nav>
+
+    <hr>
+
+    <section id="overview">
+        <h2>Dashboard Overview</h2>
+
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Total Bikes</th>
+                <th>Available Bikes</th>
+                <th>Rented Bikes</th>
+                <th>Unavailable Bikes</th>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>18</td>
+                <td>8</td>
+                <td>4</td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="station">
+        <h2>Station Information Management</h2>
+        <p>Station Manager can add, view, update and delete station information.</p>
+
+        <h3>Add Station Information</h3>
+
+        <form action="#" method="post">
+
+            <label>Station Name:</label><br>
+            <input type="text" name="station\_name">
+            <br><br>
+
+            <label>Station Location:</label><br>
+            <input type="text" name="location">
+            <br><br>
+
+            <label>Contact Number:</label><br>
+            <input type="tel" name="phone">
+            <br><br>
+
+            <label>Opening Time:</label><br>
+            <input type="time" name="opening\_time">
+            <br><br>
+
+            <label>Closing Time:</label><br>
+            <input type="time" name="closing\_time">
+            <br><br>
+
+            <input type="submit" value="Add Station">
+
+        </form>
+
+        <h3>Search Station</h3>
+        <input type="text" name="search\_station" placeholder="Search station">
+        <input type="submit" value="Search">
+
+        <h3>Station List</h3>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Station ID</th>
+                <th>Station Name</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>S101</td>
+                <td>Uttara Station</td>
+                <td>Uttara, Dhaka</td>
+                <td>01700000001</td>
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+            <tr>
+                <td>S102</td>
+                <td>Banani Station</td>
+                <td>Banani, Dhaka</td>
+                <td>01700000002</td>
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="bikes">
+        <h2>Bike Status Management</h2>
+        <p>Station Manager can update the status of bikes in the station.</p>
+
+        <h3>Add Bike Information</h3>
+
+        <form action="#" method="post">
+
+            <label>Bike ID:</label><br>
+            <input type="text" name="bike\_id">
+            <br><br>
+
+            <label>Bike Model:</label><br>
+            <input type="text" name="bike\_model">
+            <br><br>
+
+            <label>Station:</label><br>
+            <select name="station">
+                <option>Uttara Station</option>
+                <option>Banani Station</option>
+            </select>
+            <br><br>
+
+            <label>Bike Status:</label><br>
+            <select name="status">
+                <option>Available</option>
+                <option>Rented</option>
+                <option>Unavailable</option>
+            </select>
+            <br><br>
+
+            <input type="submit" value="Add Bike">
+
+        </form>
+
+        <h3>Search Bike</h3>
+        <input type="text" name="search\_bike" placeholder="Search by bike ID or model">
+        <input type="submit" value="Search">
+
+        <h3>Bike List</h3>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Bike ID</th>
+                <th>Bike Model</th>
+                <th>Station</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>B101</td>
+                <td>EcoRide X1</td>
+                <td>Uttara Station</td>
+                <td>Available</td>
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+            <tr>
+                <td>B102</td>
+                <td>EcoRide Pro</td>
+                <td>Banani Station</td>
+                <td>Rented</td>
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="availability">
+        <h2>Station Availability Monitoring</h2>
+        <p>Station Manager can check the number of available and rented bikes at each station.</p>
+
+        <h3>Search Station Availability</h3>
+        <input type="text" name="search\_availability" placeholder="Search station">
+        <input type="submit" value="Search">
+
+        <h3>Station Availability Information</h3>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Station Name</th>
+                <th>Total Bikes</th>
+                <th>Available</th>
+                <th>Rented</th>
+                <th>Unavailable</th>
+            </tr>
+            <tr>
+                <td>Uttara Station</td>
+                <td>15</td>
+                <td>10</td>
+                <td>3</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Banani Station</td>
+                <td>15</td>
+                <td>8</td>
+                <td>5</td>
+                <td>2</td>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+
+    <footer>
+        <p>EcoRide Station Manager Dashboard</p>
+    </footer>
+
+</body>
+
+</html>
