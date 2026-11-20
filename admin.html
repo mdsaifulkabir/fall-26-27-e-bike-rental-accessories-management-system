@@ -1,225 +1,280 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-    <title>Admin Dashboard - EcoRide</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin dashboard of VoltCycle E-Bike System">
+  <title>Admin Dashboard | VoltCycle E-Bike</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header>
-        <h1>EcoRide Admin Dashboard</h1>
-        <p>Welcome, Admin</p>
-        <a href="index.html">Home</a> |
-        <a href="login.html">Logout</a>
-    </header>
+  <header class="header">
+    <a href="index.html" class="logo">Volt<span>Cycle</span></a>
+    <div class="user-info">
+      <span class="badge admin">Admin</span>
+      <span>Welcome, Rifat Hasan</span>
+      <a href="index.html" class="btn btn-small btn-light">Logout</a>
+    </div>
+  </header>
 
-    <hr>
+  <nav class="topnav">
+    <button type="button" id="nav-overviewSection" onclick="showSection('overviewSection')">Dashboard Overview</button>
+    <button type="button" id="nav-usersSection" onclick="showSection('usersSection')">Manage Users</button>
+    <button type="button" id="nav-rulesSection" onclick="showSection('rulesSection')">Rental Rules &amp; Pricing</button>
+    <button type="button" id="nav-logSection" onclick="showSection('logSection')">Activity Log</button>
+  </nav>
 
-    <nav>
-        <a href="#overview">Dashboard Overview</a> |
-        <a href="#users">Manage Users</a> |
-        <a href="#activity">Activity Log</a> |
-        <a href="#rules">Rental Rules and Pricing</a>
-    </nav>
+  <main class="container">
 
-    <hr>
+    <section id="overviewSection" class="page-section">
+      <h2 class="page-title">Admin Dashboard Overview</h2>
+      <p class="page-subtitle">Live summary of users, e-bikes, bookings, and accessory sales.
+        <span id="reportTime" class="hint"></span></p>
 
-    <section id="overview">
-        <h2>Dashboard Overview</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-number" id="statUsers">0</div><div class="stat-label">Total users</div></div>
+        <div class="stat-card"><div class="stat-number" id="statPending">0</div><div class="stat-label">Pending approvals</div></div>
+        <div class="stat-card"><div class="stat-number" id="statBikes">0</div><div class="stat-label">Total e-bikes</div></div>
+        <div class="stat-card"><div class="stat-number" id="statAvailableBikes">0</div><div class="stat-label">Available e-bikes</div></div>
+        <div class="stat-card"><div class="stat-number" id="statBookings">0</div><div class="stat-label">Total bookings</div></div>
+        <div class="stat-card"><div class="stat-number" id="statSales">0 Tk</div><div class="stat-label">Accessory sales</div></div>
+        <div class="stat-card"><div class="stat-number" id="statMonthly">0</div><div class="stat-label">Bookings this month</div></div>
+      </div>
 
-        <table border="1" cellpadding="10">
-            <tr>
-                <th>Total Users</th>
-                <th>Total Bikes</th>
-                <th>Total Bookings</th>
-                <th>Accessory Sales</th>
-            </tr>
-            <tr>
-                <td>120</td>
-                <td>45</td>
-                <td>85</td>
-                <td>৳25,000</td>
-            </tr>
-        </table>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3>Users by Role</h3>
+            <div id="roleChart"></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <h3>Monthly Booking Information</h3>
+            <div id="monthlyChart"></div>
+          </div>
+        </div>
+      </div>
 
-        <h3>Monthly Booking Information</h3>
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Month</th>
-                <th>Total Bookings</th>
-            </tr>
-            <tr>
-                <td>October</td>
-                <td>35</td>
-            </tr>
-            <tr>
-                <td>September</td>
-                <td>28</td>
-            </tr>
-        </table>
+      <button type="button" class="btn" onclick="renderOverview()">Refresh Overview</button>
     </section>
 
-    <hr>
+    <section id="usersSection" class="page-section">
+      <h2 class="page-title">Manage Users</h2>
+      <p class="page-subtitle">Add, view, update, delete, and search user accounts. New Admin accounts can only be created here.</p>
 
-    <section id="users">
-        <h2>Manage Users</h2>
+      <div id="userMessage" class="message"></div>
 
-        <h3>Add New User</h3>
-        <form action="#" method="post">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3 id="userFormTitle">Add New User</h3>
+            <form id="userForm" onsubmit="return saveUser()">
+              <fieldset>
+                <legend>User Details</legend>
+                <table class="form-table">
+                  <tr>
+                    <td><label for="userName">Full Name:</label></td>
+                    <td>
+                      <input type="text" id="userName" placeholder="e.g. Nadia Rahman">
+                      <span class="error" id="userNameError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="userUsername">Username:</label></td>
+                    <td>
+                      <input type="text" id="userUsername" placeholder="At least 4 characters">
+                      <span class="error" id="userUsernameError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="userEmail">Email:</label></td>
+                    <td>
+                      <input type="email" id="userEmail" placeholder="name@voltcycle.com">
+                      <span class="error" id="userEmailError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="userPassword">Password:</label></td>
+                    <td>
+                      <input type="password" id="userPassword" placeholder="At least 8 characters">
+                      <span class="error" id="userPasswordError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="userRole">Role:</label></td>
+                    <td>
+                      <select id="userRole">
+                        <option value="">-- Select Role --</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Customer">Customer</option>
+                        <option value="Station Manager">Station Manager</option>
+                        <option value="Seller">Seller</option>
+                      </select>
+                      <span class="error" id="userRoleError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Status:</td>
+                    <td>
+                      <input type="radio" id="statusActive" name="userStatus" value="Active" checked>
+                      <label for="statusActive" class="option-label">Active</label>
+                      <input type="radio" id="statusBlocked" name="userStatus" value="Blocked">
+                      <label for="statusBlocked" class="option-label">Blocked</label>
+                      <input type="radio" id="statusPending" name="userStatus" value="Pending">
+                      <label for="statusPending" class="option-label">Pending</label>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
+              <input type="submit" id="userSaveButton" class="btn" value="Add User">
+              <button type="button" class="btn btn-secondary" onclick="resetUserForm()">Cancel</button>
+            </form>
+          </div>
+        </div>
 
-            <label>Full Name:</label><br>
-            <input type="text" name="name">
-            <br><br>
-
-            <label>Email:</label><br>
-            <input type="email" name="email">
-            <br><br>
-
-            <label>Password:</label><br>
-            <input type="password" name="password">
-            <br><br>
-
-            <label>Phone:</label><br>
-            <input type="tel" name="phone">
-            <br><br>
-
-            <label>User Role:</label><br>
-            <select name="role">
-                <option>Admin</option>
-                <option>Customer</option>
-                <option>Station Manager</option>
-                <option>Seller</option>
-            </select>
-            <br><br>
-
-            <input type="submit" value="Add User">
-
-        </form>
-
-        <h3>Search User</h3>
-        <input type="text" name="search_user" placeholder="Search by name or email">
-        <input type="submit" value="Search">
-
-        <h3>User List</h3>
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Rahim Ahmed</td>
-                <td>rahim@gmail.com</td>
-                <td>Customer</td>
-                <td>Active</td>
-                <td>
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Karim Hasan</td>
-                <td>karim@gmail.com</td>
-                <td>Station Manager</td>
-                <td>Active</td>
-                <td>
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
-        </table>
+        <div class="col-wide">
+          <div class="card">
+            <h3>All Users</h3>
+            <div class="search-bar">
+              <input type="text" id="userSearch" placeholder="Search by name, username, email or id..." onkeyup="renderUsers()">
+              <select id="userRoleFilter" onchange="renderUsers()">
+                <option value="All">All roles</option>
+                <option value="Admin">Admin</option>
+                <option value="Customer">Customer</option>
+                <option value="Station Manager">Station Manager</option>
+                <option value="Seller">Seller</option>
+              </select>
+              <select id="userStatusFilter" onchange="renderUsers()">
+                <option value="All">Any status</option>
+                <option value="Active">Active</option>
+                <option value="Blocked">Blocked</option>
+                <option value="Pending">Pending approval</option>
+              </select>
+            </div>
+            <p class="result-count" id="userCount"></p>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Name</th><th>Username</th><th>Role</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <hr>
+    <section id="rulesSection" class="page-section">
+      <h2 class="page-title">Rental Rules &amp; Pricing Management</h2>
+      <p class="page-subtitle">Add, update, delete, and search hourly rental pricing and late return fees.</p>
 
-    <section id="activity">
-        <h2>Activity Log</h2>
+      <div id="rulesMessage" class="message"></div>
 
-        <h3>Search Activity</h3>
-        <input type="text" name="search_activity" placeholder="Search activity">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3 id="ruleFormTitle">Add New Rental Rule</h3>
+            <form id="ruleForm" onsubmit="return saveRule()">
+              <fieldset>
+                <legend>Rule &amp; Pricing Details</legend>
+                <table class="form-table">
+                  <tr>
+                    <td><label for="ruleTitle">Rule Title:</label></td>
+                    <td>
+                      <input type="text" id="ruleTitle" placeholder="e.g. Standard Hourly Rental">
+                      <span class="error" id="ruleTitleError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="ruleHourly">Hourly Price (Tk):</label></td>
+                    <td>
+                      <input type="number" id="ruleHourly" min="10" max="1000" placeholder="e.g. 80">
+                      <span class="error" id="ruleHourlyError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="ruleLateFee">Late Fee / Hr (Tk):</label></td>
+                    <td>
+                      <input type="number" id="ruleLateFee" min="0" max="500" placeholder="e.g. 50">
+                      <span class="error" id="ruleLateFeeError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="ruleMaxHours">Max Rental Hours:</label></td>
+                    <td>
+                      <input type="number" id="ruleMaxHours" min="1" max="48" placeholder="e.g. 8">
+                      <span class="error" id="ruleMaxHoursError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="ruleDesc">Description:</label></td>
+                    <td>
+                      <textarea id="ruleDesc" rows="3" cols="30" placeholder="Short rule details"></textarea>
+                      <span class="error" id="ruleDescError"></span>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
+              <input type="submit" id="ruleSaveButton" class="btn" value="Add Rule">
+              <button type="button" class="btn btn-secondary" onclick="resetRuleForm()">Cancel</button>
+            </form>
+          </div>
+        </div>
 
-        <input type="submit" value="Search">
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Activity ID</th>
-                <th>User</th>
-                <th>Activity</th>
-                <th>Date</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Rahim Ahmed</td>
-                <td>Booked an E-Bike</td>
-                <td>01-11-2026</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Karim Hasan</td>
-                <td>Updated Bike Status</td>
-                <td>01-11-2026</td>
-            </tr>
-        </table>
+        <div class="col-wide">
+          <div class="card">
+            <h3>Active Rental Rules</h3>
+            <div class="search-bar">
+              <input type="text" id="ruleSearch" placeholder="Search rules by title or description..." onkeyup="renderRules()">
+            </div>
+            <p class="result-count" id="ruleCount"></p>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Rule</th><th>Hourly Price</th><th>Late Fee</th><th>Max Hours</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="ruleTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <hr>
+    <section id="logSection" class="page-section">
+      <h2 class="page-title">Activity Log</h2>
+      <p class="page-subtitle">Monitor and search important system activities, newest first.</p>
 
-    <section id="rules">
-        <h2>Rental Rules and Pricing Management</h2>
-
-        <h3>Add Rental Rule or Price</h3>
-
-        <form action="#" method="post">
-
-            <label>Rule or Price Name:</label><br>
-            <input type="text" name="rule">
-            <br><br>
-
-            <label>Value:</label><br>
-            <input type="text" name="value">
-            <br><br>
-
-            <label>Description:</label><br>
-            <textarea name="description" rows="4" cols="40"></textarea>
-            <br><br>
-
-            <input type="submit" value="Save">
-
-        </form>
-
-        <h3>Current Rental Rules</h3>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Rule Name</th>
-                <th>Value</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>Hourly Rental Price</td>
-                <td>৳100</td>
-                <td>Price per hour</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>
-            <tr>
-                <td>Late Return Fee</td>
-                <td>৳50</td>
-                <td>Additional fee for late return</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>
-        </table>
+      <div class="card">
+        <div class="search-bar">
+          <input type="text" id="logSearch" placeholder="Search activity records..." onkeyup="renderLog()">
+          <select id="logTypeFilter" onchange="renderLog()">
+            <option value="All">All activity types</option>
+            <option value="User">User</option>
+            <option value="Bike">Bike</option>
+            <option value="Product">Product</option>
+            <option value="Booking">Booking</option>
+            <option value="Security">Security</option>
+            <option value="Rules">Rules</option>
+          </select>
+          <button type="button" class="btn btn-danger" onclick="clearLog()">Clear Log</button>
+        </div>
+        <p class="result-count" id="logCount"></p>
+        <div class="notice-board" id="logBoard"></div>
+      </div>
     </section>
 
-    <hr>
+  </main>
 
-    <footer>
-        <p>EcoRide Admin Dashboard</p>
-    </footer>
+  <footer class="footer">
+    &copy; 2026 VoltCycle E-Bike Rental &amp; Accessories Management System &middot; CSC 3215 Web Technologies
+  </footer>
 
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>

@@ -1,53 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-    <title>Login - EcoRide</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to VoltCycle E-Bike Rental System">
+  <title>Login | VoltCycle E-Bike</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header>
-        <h1>EcoRide</h1>
-        <nav>
-            <a href="index.html">Home</a> |
-            <a href="login.html">Login</a> |
-            <a href="register.html">Register</a>
-        </nav>
-    </header>
+  <header class="header">
+    <a href="index.html" class="logo">Volt<span>Cycle</span></a>
+    <div class="user-info">
+      <a href="login.html" class="btn btn-small btn-light">Login</a>
+      <a href="register.html" class="btn btn-small">Register</a>
+    </div>
+  </header>
 
-    <hr>
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="index.html#fleet">Find E-Bikes</a>
+    <a href="index.html#who">Who It's For</a>
+    <a href="index.html#how">How It Works</a>
+    <a href="index.html#hours">Station Hours</a>
+    <a href="index.html#contact">Contact Us</a>
+  </nav>
 
-    <h2>Login to Your Account</h2>
+  <main class="container">
+    <div class="auth-box">
 
-    <form action="#" method="post">
+      <div class="card">
+        <h2 class="page-title">Welcome back</h2>
+        <p class="page-subtitle">One login for all roles: Admin, Customer, Station Manager, and Seller.</p>
 
-        <label>Email Address:</label>
-        <br>
-        <input type="email" name="email" required>
-        <br><br>
+        <div id="loginMessage" class="message"></div>
 
-        <label>Password:</label>
-        <br>
-        <input type="password" name="password" required>
-        <br><br>
+        <form id="loginForm" action="index.html" method="get" onsubmit="return validateLogin()">
+          <fieldset>
+            <legend>Your account</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="username">Username or Email:</label></td>
+                <td>
+                  <input type="text" id="username" name="username" placeholder="e.g. customer or rahim@mail.com">
+                  <span class="error" id="usernameError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="password">Password:</label></td>
+                <td>
+                  <input type="password" id="password" placeholder="Your password">
+                  <span class="error" id="passwordError"></span>
+                  <input type="checkbox" id="showPassword" onchange="togglePassword()">
+                  <label for="showPassword" class="option-label">Show password</label>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
 
-        <label>Select Your Role:</label>
-        <br>
-        <select name="role" required>
-            <option value="">Select Role</option>
-            <option value="admin">Admin</option>
-            <option value="customer">Customer</option>
-            <option value="manager">Station Manager</option>
-            <option value="seller">Seller</option>
-        </select>
-        <br><br>
+          <input type="submit" class="btn btn-block" value="Login">
+        </form>
 
-        <input type="submit" value="Login">
+        <p class="auth-switch">Don't have an account? <a href="register.html">Register here</a></p>
+      </div>
 
-    </form>
+      <div class="card">
+        <h3>Demo accounts</h3>
+        <p class="hint">Click "Use" to fill the form, then press Login.</p>
+        <table class="demo-accounts">
+          <tr>
+            <td><span class="badge admin">Admin</span></td>
+            <td>admin / admin1234</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('admin', 'admin1234')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge customer">Customer</span></td>
+            <td>customer / customer123</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('customer', 'customer123')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge manager">Manager</span></td>
+            <td>manager / manager123</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('manager', 'manager123')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge seller">Seller</span></td>
+            <td>seller / seller123</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('seller', 'seller123')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge orange">Pending</span></td>
+            <td>jamal / jamal1234</td>
+            <td><button type="button" class="btn btn-small btn-secondary" onclick="fillDemo('jamal', 'jamal1234')">Use</button></td>
+          </tr>
+        </table>
+      </div>
 
-    <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+  </main>
 
-    <p><a href="index.html">Back to Home</a></p>
+  <footer class="footer">
+    &copy; 2026 VoltCycle E-Bike Rental &amp; Accessories Management System &middot; CSC 3215 Web Technologies
+  </footer>
 
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
