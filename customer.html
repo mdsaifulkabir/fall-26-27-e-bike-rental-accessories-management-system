@@ -1,391 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide Customer Dashboard</title>
+    <meta name="description" content="Customer dashboard of VoltCycle E-Bike System">
+    <title>Customer Dashboard | VoltCycle E-Bike</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>EcoRide Customer Dashboard</h1>
-        <p>Welcome, Customer</p>
-
-        <a href="index.html">Home</a> |
-        <a href="login.html">Logout</a>
+    <header class="header">
+        <a href="index.html" class="logo">Volt<span>Cycle</span></a>
+        <div class="user-info">
+            <span class="badge customer">Customer</span>
+            <span>Welcome, Rahim Uddin</span>
+            <a href="index.html" class="btn btn-small btn-light">Logout</a>
+        </div>
     </header>
 
-    <hr>
-
-    <nav>
-        <a href="#overview">Dashboard Overview</a> |
-        <a href="#booking">E-Bike Booking</a> |
-        <a href="#rides">Ride Management</a> |
-        <a href="#mybookings">My Bookings</a> |
-        <a href="#accessories">Accessories Purchase</a> |
-        <a href="#mypurchases">My Purchases</a>
+    <nav class="topnav">
+        <button type="button" id="nav-overviewSection" onclick="showSection('overviewSection')">Dashboard
+            Overview</button>
+        <button type="button" id="nav-bookingSection" onclick="showSection('bookingSection')">E-Bike Booking</button>
+        <button type="button" id="nav-ridesSection" onclick="showSection('ridesSection')">Ride &amp; Fare</button>
+        <button type="button" id="nav-accessoriesSection" onclick="showSection('accessoriesSection')">Accessories
+            Purchase</button>
     </nav>
 
-    <hr>
-
-    <!-- DASHBOARD OVERVIEW -->
-
-    <section id="overview">
-        <h2>Dashboard Overview</h2>
-
-        <table border="1" cellpadding="10">
-            <tr>
-                <th>Total Bookings</th>
-                <th>Completed Rides</th>
-                <th>Accessories Purchased</th>
-            </tr>
-
-            <tr>
-                <td>5</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
-        </table>
-    </section>
-
-    <hr>
-
-    <!-- E-BIKE BOOKING FORM -->
-
-    <section id="booking">
-        <h2>E-Bike Booking</h2>
-
-        <p>Search for available bikes and select your preferred bike.</p>
-
-        <h3>Search Available Bikes</h3>
-
-        <form action="#availablebikes" method="get">
-
-            <label>Select Station:</label><br>
-
-            <select name="station" required>
-                <option value="">Select Station</option>
-                <option value="Dhaka North">Dhaka North Station</option>
-                <option value="Uttara">Uttara Station</option>
-                <option value="Banani">Banani Station</option>
-            </select>
-
-            <br><br>
-
-            <label>Booking Date:</label><br>
-            <input type="date" name="booking_date" required>
-
-            <br><br>
-
-            <label>Booking Time:</label><br>
-            <input type="time" name="booking_time" required>
-
-            <br><br>
-
-            <button type="submit">Search Bikes</button>
-
-        </form>
-    </section>
-
-    <hr>
-
-    <!-- AVAILABLE BIKES -->
-
-    <section id="availablebikes">
-        <h2>Available Bikes</h2>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Bike ID</th>
-                <th>Bike Model</th>
-                <th>Station</th>
-                <th>Hourly Price</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-
-            <tr>
-                <td>B101</td>
-                <td>EcoRide X1</td>
-                <td>Uttara Station</td>
-                <td>৳100</td>
-                <td>Available</td>
-                <td><a href="#rides">Book Now</a></td>
-            </tr>
-
-            <tr>
-                <td>B102</td>
-                <td>EcoRide Pro</td>
-                <td>Banani Station</td>
-                <td>৳120</td>
-                <td>Available</td>
-                <td><a href="#rides">Book Now</a></td>
-            </tr>
-        </table>
-    </section>
-
-    <hr>
-
-    <!-- RIDE MANAGEMENT AND FARE CALCULATION -->
-
-    <section id="rides">
-        <h2>Ride Management and Fare Calculation</h2>
-
-        <p>Enter your ride information below.</p>
-
-        <form action="#mybookings" method="get">
-
-            <label>Bike ID:</label><br>
-
-            <select name="bike_id" required>
-                <option value="">Select Bike</option>
-                <option value="B101">B101 - EcoRide X1</option>
-                <option value="B102">B102 - EcoRide Pro</option>
-            </select>
-
-            <br><br>
-
-            <label>Booking Date:</label><br>
-            <input type="date" name="ride_date" required>
-
-            <br><br>
-
-            <label>Start Time:</label><br>
-            <input type="time" name="start_time" required>
-
-            <br><br>
-
-            <label>Ride Duration (Hours):</label><br>
-            <input type="number" name="duration" min="1" step="0.5" required>
-
-            <br><br>
-
-            <label>Price Per Hour (৳):</label><br>
-
-            <select name="price" required>
-                <option value="">Select Hourly Price</option>
-                <option value="100">EcoRide X1 - ৳100</option>
-                <option value="120">EcoRide Pro - ৳120</option>
-            </select>
-
-            <br><br>
-
-            <label>Pickup Station:</label><br>
-
-            <select name="station" required>
-                <option value="">Select Station</option>
-                <option value="Dhaka North">Dhaka North Station</option>
-                <option value="Uttara">Uttara Station</option>
-                <option value="Banani">Banani Station</option>
-            </select>
-
-            <br><br>
-
-            <button type="submit">Calculate Fare</button>
-
-        </form>
-
-        <h3>Ride Information</h3>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Ride ID</th>
-                <th>Bike ID</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Duration</th>
-                <th>Fare</th>
-                <th>Action</th>
-            </tr>
-
-            <tr>
-                <td>R101</td>
-                <td>B101</td>
-                <td>10:00 AM</td>
-                <td>11:30 AM</td>
-                <td>1.5 Hours</td>
-                <td>৳150</td>
-                <td>
-                    <a href="#rides">Edit</a> |
-                    <a href="#rides">Delete</a>
-                </td>
-            </tr>
-        </table>
-    </section>
-
-    <hr>
-
-    <!-- MY BOOKINGS -->
-
-    <section id="mybookings">
-        <h2>My Bookings</h2>
-
-        <form action="#mybookings" method="get">
-
-            <label>Search Booking:</label><br>
-
-            <input type="text" name="search_booking" placeholder="Enter Booking ID">
-
-            <button type="submit">Search</button>
-
-        </form>
-
-        <br>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Booking ID</th>
-                <th>Bike ID</th>
-                <th>Bike Model</th>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>Fare</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-
-            <tr>
-                <td>BK101</td>
-                <td>B101</td>
-                <td>EcoRide X1</td>
-                <td>01-11-2026</td>
-                <td>1.5 Hours</td>
-                <td>৳150</td>
-                <td>Confirmed</td>
-                <td>
-                    <a href="#rides">Edit</a> |
-                    <a href="#mybookings">Cancel</a>
-                </td>
-            </tr>
-        </table>
-
-        <br>
-
-        <a href="#booking">Book Another Bike</a>
-    </section>
-
-    <hr>
-
-    <!-- ACCESSORIES PURCHASE -->
-
-    <section id="accessories">
-        <h2>Accessories Purchase</h2>
-
-        <p>Browse and purchase available bike accessories.</p>
-
-        <h3>Available Accessories</h3>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Product ID</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Action</th>
-            </tr>
-
-            <tr>
-                <td>P101</td>
-                <td>Safety Helmet</td>
-                <td>৳1500</td>
-                <td>20</td>
-                <td><a href="#purchase">Buy Now</a></td>
-            </tr>
-
-            <tr>
-                <td>P102</td>
-                <td>Bike Lock</td>
-                <td>৳500</td>
-                <td>15</td>
-                <td><a href="#purchase">Buy Now</a></td>
-            </tr>
-        </table>
-
-        <h3>Purchase Information</h3>
-
-        <form action="#mypurchases" method="get" id="purchase">
-
-            <label>Product Name:</label><br>
-
-            <select name="product" required>
-                <option value="">Select Product</option>
-                <option value="Safety Helmet">Safety Helmet - ৳1500</option>
-                <option value="Bike Lock">Bike Lock - ৳500</option>
-            </select>
-
-            <br><br>
-
-            <label>Quantity:</label><br>
-            <input type="number" name="quantity" min="1" required>
-
-            <br><br>
-
-            <label>Amount (৳):</label><br>
-            <input type="number" name="amount" min="1" required>
-
-            <br><br>
-
-            <button type="submit">Place Order</button>
-
-        </form>
-    </section>
-
-    <hr>
-
-    <!-- MY PURCHASES -->
-
-    <section id="mypurchases">
-        <h2>My Purchases</h2>
-
-        <form action="#mypurchases" method="get">
-
-            <label>Search Purchase:</label><br>
-
-            <input type="text" name="search_purchase" placeholder="Enter Order ID">
-
-            <button type="submit">Search</button>
-
-        </form>
-
-        <br>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Order ID</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-
-            <tr>
-                <td>OR101</td>
-                <td>Safety Helmet</td>
-                <td>1</td>
-                <td>৳1500</td>
-                <td>Ordered</td>
-                <td>
-                    <a href="#purchase">Edit</a> |
-                    <a href="#mypurchases">Delete</a>
-                </td>
-            </tr>
-        </table>
-
-        <br>
-
-        <a href="#accessories">Purchase Another Product</a>
-    </section>
-
-    <hr>
-
-    <footer>
-        <p>EcoRide Customer Dashboard</p>
-        <p>All Rights Reserved.</p>
+    <main class="container">
+
+        <section id="overviewSection" class="page-section">
+            <h2 class="page-title">Customer Dashboard Overview</h2>
+            <p class="page-subtitle">Your bookings, completed rides, and accessory orders at a glance.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="statMyBookings">0</div>
+                    <div class="stat-label">Total bookings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statActiveBookings">0</div>
+                    <div class="stat-label">Active bookings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statCompletedRides">0</div>
+                    <div class="stat-label">Completed rides</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statMyAccessories">0</div>
+                    <div class="stat-label">Accessories purchased</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotalSpent">0 Tk</div>
+                    <div class="stat-label">Total spent</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Quick Actions</h3>
+                <button type="button" class="btn" onclick="showSection('bookingSection')">Book an E-Bike</button>
+                <button type="button" class="btn btn-success" onclick="showSection('ridesSection')">Calculate Ride
+                    Fare</button>
+                <button type="button" class="btn btn-secondary" onclick="showSection('accessoriesSection')">Buy
+                    Accessories</button>
+            </div>
+        </section>
+
+        <section id="bookingSection" class="page-section">
+            <h2 class="page-title">E-Bike Booking</h2>
+            <p class="page-subtitle">Select a station, pick an available e-bike, and manage your bookings.</p>
+
+            <div id="bookingMessage" class="message"></div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h3 id="bookingFormTitle">Book an E-Bike</h3>
+                        <form id="bookingForm" onsubmit="return saveBooking()">
+                            <fieldset>
+                                <legend>Booking Details</legend>
+                                <table class="form-table">
+                                    <tr>
+                                        <td><label for="bookStation">Station:</label></td>
+                                        <td>
+                                            <select id="bookStation" onchange="fillAvailableBikes()"></select>
+                                            <span class="error" id="bookStationError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bookBike">Available E-Bike:</label></td>
+                                        <td>
+                                            <select id="bookBike"></select>
+                                            <span class="error" id="bookBikeError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bookDate">Booking Date:</label></td>
+                                        <td>
+                                            <input type="date" id="bookDate">
+                                            <span class="error" id="bookDateError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bookTime">Start Time:</label></td>
+                                        <td>
+                                            <input type="time" id="bookTime">
+                                            <span class="error" id="bookTimeError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bookHours">Duration (hours):</label></td>
+                                        <td>
+                                            <input type="number" id="bookHours" min="1" max="12" value="2">
+                                            <span class="error" id="bookHoursError"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                            <input type="submit" id="bookingSaveButton" class="btn btn-success" value="Confirm Booking">
+                            <button type="button" class="btn btn-secondary" onclick="resetBookingForm()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-wide">
+                    <div class="card">
+                        <h3>My Bookings</h3>
+                        <div class="search-bar">
+                            <input type="text" id="bookingSearch" placeholder="Search by bike model, station or id..."
+                                onkeyup="renderBookings()">
+                            <select id="bookingStatusFilter" onchange="renderBookings()">
+                                <option value="All">All statuses</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <p class="result-count" id="bookingCount"></p>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Bike &amp; Station</th>
+                                        <th>Date &amp; Time</th>
+                                        <th>Hours</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ridesSection" class="page-section">
+            <h2 class="page-title">Ride Management &amp; Fare Calculation</h2>
+            <p class="page-subtitle">Calculate ride fare from duration and hourly price, and manage your ride records.
+            </p>
+
+            <div id="rideMessage" class="message"></div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h3 id="rideFormTitle">Log Ride &amp; Calculate Fare</h3>
+                        <form id="rideForm" onsubmit="return saveRide()">
+                            <fieldset>
+                                <legend>Ride Details</legend>
+                                <table class="form-table">
+                                    <tr>
+                                        <td><label for="rideBikeModel">E-Bike Model:</label></td>
+                                        <td>
+                                            <input type="text" id="rideBikeModel" placeholder="e.g. VoltX City 250">
+                                            <span class="error" id="rideBikeModelError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rideStation">Station:</label></td>
+                                        <td>
+                                            <select id="rideStation"></select>
+                                            <span class="error" id="rideStationError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rideDate">Ride Date:</label></td>
+                                        <td>
+                                            <input type="date" id="rideDate">
+                                            <span class="error" id="rideDateError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rideHours">Duration (hrs):</label></td>
+                                        <td>
+                                            <input type="number" id="rideHours" min="1" max="24" value="2"
+                                                onchange="previewRideFare()" onkeyup="previewRideFare()">
+                                            <span class="error" id="rideHoursError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rideRate">Hourly Price (Tk):</label></td>
+                                        <td>
+                                            <input type="number" id="rideRate" min="10" max="1000" value="80"
+                                                onchange="previewRideFare()" onkeyup="previewRideFare()">
+                                            <span class="error" id="rideRateError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rideLateHours">Late Hours:</label></td>
+                                        <td>
+                                            <input type="number" id="rideLateHours" min="0" max="12" value="0"
+                                                onchange="previewRideFare()" onkeyup="previewRideFare()">
+                                            <span class="error" id="rideLateHoursError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rideStatus">Ride Status:</label></td>
+                                        <td>
+                                            <select id="rideStatus">
+                                                <option value="Completed">Completed</option>
+                                                <option value="Ongoing">Ongoing</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                            <div class="result-box" id="farePreviewBox"></div>
+                            <div class="form-buttons">
+                                <input type="submit" id="rideSaveButton" class="btn" value="Save Ride">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="resetRideForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-wide">
+                    <div class="card">
+                        <h3>My Ride Records</h3>
+                        <div class="search-bar">
+                            <input type="text" id="rideSearch" placeholder="Search rides by model, station or id..."
+                                onkeyup="renderRides()">
+                        </div>
+                        <p class="result-count" id="rideCount"></p>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Bike &amp; Station</th>
+                                        <th>Date</th>
+                                        <th>Duration</th>
+                                        <th>Total Fare</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rideTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="accessoriesSection" class="page-section">
+            <h2 class="page-title">Accessories Purchase</h2>
+            <p class="page-subtitle">Browse available bike accessories, place orders, and manage your purchase history.
+            </p>
+
+            <div id="orderMessage" class="message"></div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h3 id="orderFormTitle">Order Accessories</h3>
+                        <form id="orderForm" onsubmit="return saveOrder()">
+                            <fieldset>
+                                <legend>Order Details</legend>
+                                <table class="form-table">
+                                    <tr>
+                                        <td><label for="orderProduct">Accessory:</label></td>
+                                        <td>
+                                            <select id="orderProduct" onchange="previewOrderTotal()"></select>
+                                            <span class="error" id="orderProductError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="orderQty">Quantity:</label></td>
+                                        <td>
+                                            <input type="number" id="orderQty" min="1" max="20" value="1"
+                                                onchange="previewOrderTotal()" onkeyup="previewOrderTotal()">
+                                            <span class="error" id="orderQtyError"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                            <div class="result-box" id="orderPreviewBox"></div>
+                            <div class="form-buttons">
+                                <input type="submit" id="orderSaveButton" class="btn btn-success" value="Place Order">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="resetOrderForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-wide">
+                    <div class="card">
+                        <h3>My Purchase History</h3>
+                        <div class="search-bar">
+                            <input type="text" id="orderSearch" placeholder="Search orders by product, id or status..."
+                                onkeyup="renderMyOrders()">
+                        </div>
+                        <p class="result-count" id="myOrderCount"></p>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Total</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myOrdersBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 VoltCycle E-Bike Rental &amp; Accessories Management System &middot; CSC 3215 Web Technologies
     </footer>
 
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/customer.js"></script>
 </body>
 
 </html>
