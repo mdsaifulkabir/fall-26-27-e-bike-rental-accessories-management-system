@@ -1,73 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-    <title>EcoRide - Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VoltCycle E-Bike Rental & Accessories Management System">
+  <title>Home | VoltCycle E-Bike</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header>
-        <h1>EcoRide</h1>
-        <p>E-Bike Rental and Accessories Management System</p>
+  <header class="header">
+    <a href="index.html" class="logo">Volt<span>Cycle</span></a>
+    <div class="user-info">
+      <a href="login.html" class="btn btn-small btn-light">Login</a>
+      <a href="register.html" class="btn btn-small">Register</a>
+    </div>
+  </header>
 
-        <nav>
-            <a href="index.html">Home</a> |
-            <a href="login.html">Login</a> |
-            <a href="register.html">Register</a>
-        </nav>
-    </header>
+  <nav class="topnav">
+    <a href="index.html" class="active">Home</a>
+    <a href="#fleet">Find E-Bikes</a>
+    <a href="#who">Who It's For</a>
+    <a href="#how">How It Works</a>
+    <a href="#hours">Station Hours</a>
+    <a href="#contact">Contact Us</a>
+  </nav>
 
-    <hr>
+  <div class="hero">
+    <h1>Ride electric across the city</h1>
+    <p>Check live e-bike availability at nearby hubs, book in seconds, and shop essential riding accessories.</p>
 
-    <section>
-        <h2>Welcome to EcoRide</h2>
-        <p>
-            EcoRide is an online platform where customers can rent electric
-            bikes and purchase different bike accessories.
-        </p>
-        <p>
-            Our system also helps station managers manage bikes and stations,
-            while sellers can manage their products and customer orders.
-        </p>
+    <div class="hero-search">
+      <input type="text" id="fleetSearch" placeholder="Search by e-bike model, brand or station..." onkeyup="renderPublicFleet()">
+      <select id="fleetStation" onchange="renderPublicFleet()">
+        <option value="All">All stations</option>
+        <option value="Kuratoli Hub">Kuratoli Hub</option>
+        <option value="Banani Point">Banani Point</option>
+        <option value="Dhanmondi Lake">Dhanmondi Lake</option>
+        <option value="Uttara Sector 7">Uttara Sector 7</option>
+      </select>
+    </div>
+    <p class="hero-note">No account needed to browse. <a href="#fleet" class="hero-link">See available bikes &darr;</a></p>
+  </div>
 
-        <a href="login.html">Login to Continue</a>
-        <br><br>
-        <a href="register.html">Create an Account</a>
+  <main class="container">
+
+    <div class="feature-strip">
+      <div class="feature">
+        <span class="feature-icon">4</span>
+        <h3>City Hubs</h3>
+        <p>Pick up and return e-bikes at convenient stations across Dhaka.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">&#9889;</span>
+        <h3>Charged &amp; Ready</h3>
+        <p>Live battery percentage and station availability checked before you ride.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">Tk</span>
+        <h3>Clear Fare Rules</h3>
+        <p>Transparent hourly rental rates with automatic fare calculation.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">&#10003;</span>
+        <h3>Gear &amp; Accessories</h3>
+        <p>Order helmets, locks, lights, and phone mounts from verified sellers.</p>
+      </div>
+    </div>
+
+    <section id="fleet" class="home-section">
+      <div class="section-heading">
+        <h2>Available E-Bikes</h2>
+        <p>Type in the search box above or filter by station.</p>
+      </div>
+      <div class="card">
+        <p class="result-count" id="fleetCount"></p>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr><th>Model</th><th>Brand</th><th>Station</th><th>Battery</th><th>Rate</th><th>Status</th></tr>
+            </thead>
+            <tbody id="fleetBody"></tbody>
+          </table>
+        </div>
+        <p class="hint">Ready to book a ride? <a href="register.html">Create a customer account</a> or <a href="login.html">log in</a>.</p>
+      </div>
     </section>
 
-    <hr>
+    <section id="who" class="home-section">
+      <div class="section-heading">
+        <h2>Who is VoltCycle for?</h2>
+        <p>Four dedicated dashboards in one connected platform.</p>
+      </div>
 
-    <section>
-        <h2>Our Services</h2>
+      <div class="role-grid">
+        <div class="role-card customer">
+          <span class="badge customer">Customer</span>
+          <h3>Customers</h3>
+          <ul>
+            <li>Search and book available e-bikes</li>
+            <li>Track rides and calculate fares</li>
+            <li>Browse and order bike accessories</li>
+            <li>Manage bookings and orders</li>
+          </ul>
+          <a href="register.html" class="btn btn-success">Register as Customer</a>
+        </div>
 
-        <h3>E-Bike Rental</h3>
-        <p>Customers can find and book available electric bikes.</p>
+        <div class="role-card manager">
+          <span class="badge manager">Station Manager</span>
+          <h3>Station Managers</h3>
+          <ul>
+            <li>Manage station details and capacity</li>
+            <li>Update bike status and battery</li>
+            <li>Monitor station-wise availability</li>
+            <li>Requires admin approval</li>
+          </ul>
+          <a href="register.html" class="btn btn-success">Apply as Manager</a>
+        </div>
 
-        <h3>Ride Management</h3>
-        <p>Customers can check their ride details and estimated fare.</p>
+        <div class="role-card seller">
+          <span class="badge seller">Seller</span>
+          <h3>Sellers</h3>
+          <ul>
+            <li>List and manage bike accessories</li>
+            <li>Track stock and low-stock alerts</li>
+            <li>Manage customer orders and status</li>
+            <li>View total sales overview</li>
+          </ul>
+          <a href="register.html" class="btn btn-success">Register as Seller</a>
+        </div>
 
-        <h3>Accessories Shop</h3>
-        <p>Customers can browse and purchase different bike accessories.</p>
+        <div class="role-card admin">
+          <span class="badge admin">Admin</span>
+          <h3>Administrators</h3>
+          <ul>
+            <li>Manage all user accounts</li>
+            <li>Set rental rules and hourly pricing</li>
+            <li>Monitor system activity logs</li>
+            <li>View overall platform analytics</li>
+          </ul>
+          <a href="login.html" class="btn">Admin Login</a>
+        </div>
+      </div>
     </section>
 
-    <hr>
-
-    <section>
-        <h2>Our User Roles</h2>
-
-        <ul>
-            <li>Admin</li>
-            <li>Customer</li>
-            <li>Station Manager</li>
-            <li>Seller</li>
-        </ul>
+    <section id="how" class="home-section">
+      <div class="section-heading">
+        <h2>How it works</h2>
+        <p>Three simple steps to get moving.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Register</h3>
+          <p>Open <a href="register.html">Register</a>, select Customer, Station Manager, or Seller, and complete your details.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Log in</h3>
+          <p>Use the <a href="login.html">single login page</a>. VoltCycle automatically routes you to your role dashboard.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Ride &amp; Manage</h3>
+          <p>Book e-bikes, calculate ride fares, manage stations, or sell accessories from one system.</p>
+        </div>
+      </div>
     </section>
 
-    <hr>
+    <div class="row">
+      <section id="hours" class="col home-section">
+        <div class="card">
+          <h3>Station Operating Hours</h3>
+          <table class="data-table">
+            <thead>
+              <tr><th>Days</th><th>Hours</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sunday - Wednesday</td><td>7:00 AM - 10:00 PM</td></tr>
+              <tr><td>Thursday</td><td>7:00 AM - 11:00 PM</td></tr>
+              <tr><td>Friday</td><td>2:00 PM - 11:00 PM</td></tr>
+              <tr><td>Saturday</td><td>8:00 AM - 10:00 PM</td></tr>
+            </tbody>
+          </table>
+          <p class="hint">Charging and maintenance checks run overnight at all hubs.</p>
+        </div>
+      </section>
 
-    <footer>
-        <p>EcoRide - E-Bike Rental and Accessories Management System</p>
-        <p>Copyright 2026 EcoRide</p>
-    </footer>
+      <section id="contact" class="col home-section">
+        <div class="card">
+          <h3>Contact Us</h3>
+          <p><strong>VoltCycle Mobility Hub</strong><br>
+             Dhaka City E-Bike Network</p>
+          <table class="contact-table">
+            <tr>
+              <td>Address:</td>
+              <td>Kuratoli, Kuril, Khilkhet, Dhaka 1229, Bangladesh</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>+88 01711-000001</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td><a href="mailto:support@voltcycle.com">support@voltcycle.com</a></td>
+            </tr>
+          </table>
+          <p class="hint">Need help with a booking or order? Visit your nearest station desk.</p>
+        </div>
+      </section>
+    </div>
 
+    <section class="home-section">
+      <div class="cta-band">
+        <h2>Ready for your next electric ride?</h2>
+        <p>Create your account in under two minutes.</p>
+        <a href="register.html" class="btn btn-light">Create an account</a>
+        <a href="login.html" class="btn btn-secondary">I already have one</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 VoltCycle E-Bike Rental &amp; Accessories Management System &middot; CSC 3215 Web Technologies
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>
