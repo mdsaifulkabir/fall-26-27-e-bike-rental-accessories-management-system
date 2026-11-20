@@ -1,225 +1,298 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
 <head>
-    <title>Station Manager Dashboard - EcoRide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Station Manager dashboard of VoltCycle E-Bike System">
+    <title>Station Manager Dashboard | VoltCycle E-Bike</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>EcoRide Station Manager Dashboard</h1>
-        <p>Welcome, Station Manager</p>
-        <a href="index.html">Home</a> |
-        <a href="login.html">Logout</a>
+    <header class="header">
+        <a href="index.html" class="logo">Volt<span>Cycle</span></a>
+        <div class="user-info">
+            <span class="badge manager">Station Manager</span>
+            <span>Welcome, Sadia Akter</span>
+            <a href="index.html" class="btn btn-small btn-light">Logout</a>
+        </div>
     </header>
 
-    <hr>
-
-    <nav>
-        <a href="#overview">Dashboard Overview</a> |
-        <a href="#station">Station Information</a> |
-        <a href="#bikes">Bike Status Management</a> |
-        <a href="#availability">Station Availability</a>
+    <nav class="topnav">
+        <button type="button" id="nav-overviewSection" onclick="showSection('overviewSection')">Dashboard
+            Overview</button>
+        <button type="button" id="nav-stationsSection" onclick="showSection('stationsSection')">Station
+            Information</button>
+        <button type="button" id="nav-bikesSection" onclick="showSection('bikesSection')">Bike Status
+            Management</button>
+        <button type="button" id="nav-availabilitySection" onclick="showSection('availabilitySection')">Station
+            Availability</button>
     </nav>
 
-    <hr>
+    <main class="container">
 
-    <section id="overview">
-        <h2>Dashboard Overview</h2>
+        <section id="overviewSection" class="page-section">
+            <h2 class="page-title">Station Manager Overview</h2>
+            <p class="page-subtitle">Fleet summary across all e-bike stations.</p>
 
-        <table border="1" cellpadding="10">
-            <tr>
-                <th>Total Bikes</th>
-                <th>Available Bikes</th>
-                <th>Rented Bikes</th>
-                <th>Unavailable Bikes</th>
-            </tr>
-            <tr>
-                <td>30</td>
-                <td>18</td>
-                <td>8</td>
-                <td>4</td>
-            </tr>
-        </table>
-    </section>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotalBikes">0</div>
+                    <div class="stat-label">Total bikes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statAvailable">0</div>
+                    <div class="stat-label">Available bikes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statRented">0</div>
+                    <div class="stat-label">Rented bikes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statUnavailable">0</div>
+                    <div class="stat-label">Unavailable bikes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotalStations">0</div>
+                    <div class="stat-label">Total stations</div>
+                </div>
+            </div>
 
-    <hr>
+            <div class="card">
+                <h3>Quick Actions</h3>
+                <button type="button" class="btn" onclick="showSection('stationsSection')">Manage Stations</button>
+                <button type="button" class="btn btn-success" onclick="showSection('bikesSection')">Manage Bike
+                    Status</button>
+                <button type="button" class="btn btn-secondary" onclick="showSection('availabilitySection')">Monitor
+                    Availability</button>
+            </div>
+        </section>
 
-    <section id="station">
-        <h2>Station Information Management</h2>
-        <p>Station Manager can add, view, update and delete station information.</p>
+        <section id="stationsSection" class="page-section">
+            <h2 class="page-title">Station Information Management</h2>
+            <p class="page-subtitle">Add, view, update, delete, and search bike stations.</p>
 
-        <h3>Add Station Information</h3>
+            <div id="stationMessage" class="message"></div>
 
-        <form action="#" method="post">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h3 id="stationFormTitle">Add New Station</h3>
+                        <form id="stationForm" onsubmit="return saveStation()">
+                            <fieldset>
+                                <legend>Station Details</legend>
+                                <table class="form-table">
+                                    <tr>
+                                        <td><label for="stationName">Station Name:</label></td>
+                                        <td>
+                                            <input type="text" id="stationName" placeholder="e.g. Mirpur 10 Hub">
+                                            <span class="error" id="stationNameError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="stationLocation">Location:</label></td>
+                                        <td>
+                                            <input type="text" id="stationLocation" placeholder="Road / Area">
+                                            <span class="error" id="stationLocationError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="stationCapacity">Dock Capacity:</label></td>
+                                        <td>
+                                            <input type="number" id="stationCapacity" min="2" max="100"
+                                                placeholder="2 - 100">
+                                            <span class="error" id="stationCapacityError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="stationManagerName">Manager Name:</label></td>
+                                        <td>
+                                            <input type="text" id="stationManagerName" placeholder="e.g. Sadia Akter">
+                                            <span class="error" id="stationManagerNameError"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                            <input type="submit" id="stationSaveButton" class="btn" value="Add Station">
+                            <button type="button" class="btn btn-secondary" onclick="resetStationForm()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
 
-            <label>Station Name:</label><br>
-            <input type="text" name="station\_name">
-            <br><br>
+                <div class="col-wide">
+                    <div class="card">
+                        <h3>All Stations</h3>
+                        <div class="search-bar">
+                            <input type="text" id="stationSearch"
+                                placeholder="Search stations by name, location or id..." onkeyup="renderStations()">
+                        </div>
+                        <p class="result-count" id="stationCount"></p>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Station Name</th>
+                                        <th>Location</th>
+                                        <th>Capacity</th>
+                                        <th>Manager</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stationTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <label>Station Location:</label><br>
-            <input type="text" name="location">
-            <br><br>
+        <section id="bikesSection" class="page-section">
+            <h2 class="page-title">Bike Status Management</h2>
+            <p class="page-subtitle">Add, view, update bike status (Available, Rented, Unavailable), delete, and search
+                bikes.</p>
 
-            <label>Contact Number:</label><br>
-            <input type="tel" name="phone">
-            <br><br>
+            <div id="bikeMessage" class="message"></div>
 
-            <label>Opening Time:</label><br>
-            <input type="time" name="opening\_time">
-            <br><br>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h3 id="bikeFormTitle">Add New E-Bike</h3>
+                        <form id="bikeForm" onsubmit="return saveBike()">
+                            <fieldset>
+                                <legend>E-Bike Details</legend>
+                                <table class="form-table">
+                                    <tr>
+                                        <td><label for="bikeModel">Model:</label></td>
+                                        <td>
+                                            <input type="text" id="bikeModel" placeholder="e.g. VoltX City 250">
+                                            <span class="error" id="bikeModelError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bikeBrand">Brand:</label></td>
+                                        <td>
+                                            <input type="text" id="bikeBrand" placeholder="e.g. VoltCycle">
+                                            <span class="error" id="bikeBrandError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bikeStation">Station:</label></td>
+                                        <td>
+                                            <select id="bikeStation"></select>
+                                            <span class="error" id="bikeStationError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bikeBattery">Battery (%):</label></td>
+                                        <td>
+                                            <input type="number" id="bikeBattery" min="0" max="100"
+                                                placeholder="0 - 100">
+                                            <span class="error" id="bikeBatteryError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="bikeRate">Hourly Rate (Tk):</label></td>
+                                        <td>
+                                            <input type="number" id="bikeRate" min="10" max="1000"
+                                                placeholder="e.g. 80">
+                                            <span class="error" id="bikeRateError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status:</td>
+                                        <td>
+                                            <input type="radio" id="bikeAvail" name="bikeStatus" value="Available"
+                                                checked>
+                                            <label for="bikeAvail" class="option-label">Available</label>
+                                            <input type="radio" id="bikeRented" name="bikeStatus" value="Rented">
+                                            <label for="bikeRented" class="option-label">Rented</label>
+                                            <input type="radio" id="bikeUnavail" name="bikeStatus" value="Unavailable">
+                                            <label for="bikeUnavail" class="option-label">Unavailable</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                            <input type="submit" id="bikeSaveButton" class="btn" value="Add E-Bike">
+                            <button type="button" class="btn btn-secondary" onclick="resetBikeForm()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
 
-            <label>Closing Time:</label><br>
-            <input type="time" name="closing\_time">
-            <br><br>
+                <div class="col-wide">
+                    <div class="card">
+                        <h3>E-Bike Fleet</h3>
+                        <div class="search-bar">
+                            <input type="text" id="bikeSearch"
+                                placeholder="Search bikes by model, brand, station or id..." onkeyup="renderBikes()">
+                            <select id="bikeStatusFilter" onchange="renderBikes()">
+                                <option value="All">All statuses</option>
+                                <option value="Available">Available</option>
+                                <option value="Rented">Rented</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </div>
+                        <p class="result-count" id="bikeCount"></p>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Model</th>
+                                        <th>Station</th>
+                                        <th>Battery</th>
+                                        <th>Rate</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bikeTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <input type="submit" value="Add Station">
+        <section id="availabilitySection" class="page-section">
+            <h2 class="page-title">Station Availability Monitoring</h2>
+            <p class="page-subtitle">Check total, available, rented, and unavailable bikes at each station.</p>
 
-        </form>
+            <div class="card">
+                <div class="search-bar">
+                    <input type="text" id="availabilitySearch"
+                        placeholder="Search station availability by name or location..." onkeyup="renderAvailability()">
+                </div>
+                <p class="result-count" id="availabilityCount"></p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Station</th>
+                                <th>Bikes / Capacity</th>
+                                <th>Available</th>
+                                <th>Rented</th>
+                                <th>Unavailable</th>
+                            </tr>
+                        </thead>
+                        <tbody id="availabilityBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-        <h3>Search Station</h3>
-        <input type="text" name="search\_station" placeholder="Search station">
-        <input type="submit" value="Search">
+    </main>
 
-        <h3>Station List</h3>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Station ID</th>
-                <th>Station Name</th>
-                <th>Location</th>
-                <th>Contact</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>S101</td>
-                <td>Uttara Station</td>
-                <td>Uttara, Dhaka</td>
-                <td>01700000001</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>
-            <tr>
-                <td>S102</td>
-                <td>Banani Station</td>
-                <td>Banani, Dhaka</td>
-                <td>01700000002</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>
-        </table>
-    </section>
-
-    <hr>
-
-    <section id="bikes">
-        <h2>Bike Status Management</h2>
-        <p>Station Manager can update the status of bikes in the station.</p>
-
-        <h3>Add Bike Information</h3>
-
-        <form action="#" method="post">
-
-            <label>Bike ID:</label><br>
-            <input type="text" name="bike\_id">
-            <br><br>
-
-            <label>Bike Model:</label><br>
-            <input type="text" name="bike\_model">
-            <br><br>
-
-            <label>Station:</label><br>
-            <select name="station">
-                <option>Uttara Station</option>
-                <option>Banani Station</option>
-            </select>
-            <br><br>
-
-            <label>Bike Status:</label><br>
-            <select name="status">
-                <option>Available</option>
-                <option>Rented</option>
-                <option>Unavailable</option>
-            </select>
-            <br><br>
-
-            <input type="submit" value="Add Bike">
-
-        </form>
-
-        <h3>Search Bike</h3>
-        <input type="text" name="search\_bike" placeholder="Search by bike ID or model">
-        <input type="submit" value="Search">
-
-        <h3>Bike List</h3>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Bike ID</th>
-                <th>Bike Model</th>
-                <th>Station</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>B101</td>
-                <td>EcoRide X1</td>
-                <td>Uttara Station</td>
-                <td>Available</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>
-            <tr>
-                <td>B102</td>
-                <td>EcoRide Pro</td>
-                <td>Banani Station</td>
-                <td>Rented</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>
-        </table>
-    </section>
-
-    <hr>
-
-    <section id="availability">
-        <h2>Station Availability Monitoring</h2>
-        <p>Station Manager can check the number of available and rented bikes at each station.</p>
-
-        <h3>Search Station Availability</h3>
-        <input type="text" name="search\_availability" placeholder="Search station">
-        <input type="submit" value="Search">
-
-        <h3>Station Availability Information</h3>
-
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Station Name</th>
-                <th>Total Bikes</th>
-                <th>Available</th>
-                <th>Rented</th>
-                <th>Unavailable</th>
-            </tr>
-            <tr>
-                <td>Uttara Station</td>
-                <td>15</td>
-                <td>10</td>
-                <td>3</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>Banani Station</td>
-                <td>15</td>
-                <td>8</td>
-                <td>5</td>
-                <td>2</td>
-            </tr>
-        </table>
-    </section>
-
-    <hr>
-
-    <footer>
-        <p>EcoRide Station Manager Dashboard</p>
+    <footer class="footer">
+        &copy; 2026 VoltCycle E-Bike Rental &amp; Accessories Management System &middot; CSC 3215 Web Technologies
     </footer>
 
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/manager.js"></script>
 </body>
 
 </html>
