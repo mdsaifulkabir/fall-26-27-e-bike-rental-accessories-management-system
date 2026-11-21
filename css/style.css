@@ -588,10 +588,13 @@ input[type="checkbox"] {
    HOME, LOGIN AND REGISTER PAGES
    --------------------------------------------------------------------- */
 .hero {
-    background-color: #132A2E;
-    color: white;
-    text-align: center;
-    padding: 70px 20px;
+  background-color: #132A2E;
+  background-image: linear-gradient(rgba(19, 42, 46, 0.50), rgba(19, 42, 46, 0.50)), url("../images/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 70px 20px;
 }
 
 .hero h1 {
@@ -602,7 +605,7 @@ input[type="checkbox"] {
 
 .hero p {
     font-size: 1.15rem;
-    color: #CCE3DF;
+    color: white;
     max-width: 650px;
     margin: 0 auto 24px auto;
 }
@@ -864,4 +867,10 @@ input[type="checkbox"] {
     padding: 16px;
     margin-top: 30px;
     font-size: 0.88rem;
+}
+body.auth-bg {
+  background-image: linear-gradient(rgba(19, 42, 46, 0.25), rgba(19, 42, 46, 0.25)), url("../images/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
